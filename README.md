@@ -1,8 +1,6 @@
-# 🪙 Rugs.fun Trading Rust Bot
+# Rugs.fun Trading Rust Bot
 
 A Solana-based automated trading bot for **Rugs.fun** — detects new game rounds in real-time via WebSocket, and automatically buys and sells based on configurable parameters.
-
-> ⚠️ **High-risk degen project for entertainment purposes. Use at your own risk.**
 
 ---
 
@@ -66,9 +64,7 @@ target_multiplier = 1.2
 ### 3️⃣ Run the Bot
 
 ```bash
-
 cargo run --release
-
 ```
 
 Watch logs for transaction signatures and status updates.
