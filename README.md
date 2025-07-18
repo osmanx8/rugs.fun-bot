@@ -1,36 +1,27 @@
-# Rugs.fun Trading Rust Bot
+# 🎰 Rugs.fun Trading Bot
+A high-speed, automated Solana trading bot tailored for Rugs.fun — the degen meme casino. This bot listens to live game rounds via WebSocket and executes auto-buy/sell strategies based on your config.
 
-A Solana-based automated trading bot for **Rugs.fun** — detects new game rounds in real-time via WebSocket, and automatically buys and sells based on configurable parameters.
 
 ---
 
 ## 📬 Contact
 
-Feel free to reach out for collaborations, feature requests, or questions: [Telegram](https://t.me/shiny0103) | [Twitter](https://x.com/0xTan1319)
+ [Telegram](https://t.me/ShadowRusii)
 
 ---
 
-## 📌 Features
+🚀 Features
+🔄 Live Game Detection: Subscribes to Rugs.fun rounds via on-chain WebSocket updates.
 
-- 🔍 Detects new Rugs.fun game rounds live via on-chain WebSocket updates.
-- ⚡ Automatically places buy orders (bets) when a new round starts.
-- 📤 Attempts to sell after a configurable delay or multiplier threshold.
-- 📝 Easy-to-edit config file (`config.toml`)
-- 🦀 Fully written in Rust using Solana SDK.
+⚡ Auto Buy & Sell: Executes buys at round start, sells based on multiplier or delay.
+
+🛠️ Easy Config: Tune behavior via config.toml.
+
+🧠 Custom Logic Ready: Extend for strategy changes or CPI integration.
+
+🦀 Blazingly Fast: Written in Rust using Solana SDK for performance.
 
 ---
-
-## 📂 Project Structure
-
-rugs_bot/
-├── Cargo.toml
-├── README.md
-├── config.toml
-└── src/
-├── main.rs
-├── config.rs
-├── buy_sell.rs
-└── listener.rs
 
 
 ---
@@ -42,10 +33,15 @@ rugs_bot/
 Ensure you have Rust and Solana CLI installed:
 
 ```bash
-rustup install stable
-solana --version
+# Install Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-cargo build
+# Install Solana CLI
+sh -c "$(curl -sSfL https://release.solana.com/v1.18.11/install)"
+
+# Confirm install
+solana --version
+cargo --version
 ```
 
 ### 2️⃣ Configure the Bot
@@ -57,43 +53,37 @@ rpc_url = "https://api.mainnet-beta.solana.com"
 keypair_path = "/home/youruser/.config/solana/id.json"
 program_id = "REPLACE_WITH_RUGS_FUN_PROGRAM_ID"
 market_account = "REPLACE_WITH_MARKET_ACCOUNT"
-buy_amount_lamports = 10000000  # 0.01 SOL
-target_multiplier = 1.2
+buy_amount_lamports = 10000000        # e.g. 0.01 SOL
+target_multiplier = 1.2               # Auto-sell multiplier
 ```
 
 ### 3️⃣ Run the Bot
 
 ```bash
+cargo build --release
 cargo run --release
 ```
 
 Watch logs for transaction signatures and status updates.
 
-### 📈 How It Works
+### 🧠 How It Works
+🛰️ Connects to the Rugs.fun market account over WebSocket.
 
-- Subscribes to the Rugs.fun market account via WebSocket.
+🔔 Detects a new round trigger in real-time.
 
-- Detects new round triggers by monitoring account data changes.
+🛒 Sends a buy transaction for configured amount.
 
-- Automatically buys in at the start of each round.
+⏳ Waits until price hits multiplier or timeout.
 
-- Waits a set duration or multiplier.
+💸 Sends a sell transaction (currently mock/transfer — should be updated to CPI).
 
-- Attempts to sell before the rug happens.
+📊 Logs every action clearly.
 
-- Logs all actions with transaction hashes.
+### ⚠️ Important Notes
+🔐 Always test on Solana Devnet before mainnet deployment.
 
-### ⚙️ Notes
+📍 Replace placeholder Program IDs & Market Account addresses with actual ones.
 
-- Replace placeholder Program ID and Market Account with actual Rugs.fun program addresses.
+🧪 Current sell logic uses system_instruction::transfer — you should replace it with actual CPI logic from Rugs.fun when ready.
 
-- Default buy/sell instructions currently use system_instruction::transfer for demonstration — update these to actual Rugs.fun CPI instructions.
-
-- Test on Solana devnet before using on mainnet with real SOL.
-
-- Add error handling, retries, and multipliers logic as needed for production use.
-
-### 🙏 Credits
-
-Developed by [0xTan1319](https://github.com/0xTan1319)  
-Inspired by the degen Solana meme casino at [Rugs.fun](https://rugs.fun)
+🔁 Add retries, error handling, and safety checks for production.
