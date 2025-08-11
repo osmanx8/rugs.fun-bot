@@ -6,7 +6,7 @@ A high-speed, automated Solana trading bot tailored for Rugs.fun — the degen m
 
 ## 📬 Contact
 
- [Telegram](https://t.me/ShadowRusii)
+ [Telegram](https://t.me/web3_maxim)
 
 ---
 
